@@ -1,3 +1,4 @@
+```cpp
 TMY
 	net
 		Controller
@@ -18,3 +19,4 @@ TMY
 			DirInfo waitDirInfo();
 			void pull(PullReq);
 			PushReq waitPush();
+```			
