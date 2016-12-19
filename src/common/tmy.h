@@ -1,3 +1,6 @@
+#ifndef __TMY_H
+#define __TMY_H
+
 #include <memory>
 
 typedef struct sockaddr_in SA4;
@@ -18,3 +21,4 @@ namespace TMY {
 	struct DirInfo;
 };
 
+#endif

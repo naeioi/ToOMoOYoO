@@ -1,12 +1,22 @@
-#include "tmy.h"
-#include <cstring>
+#ifndef __DIRINFO_H
+#define __DIRINFO_H
 
-struct TMY::DirInfo {
-	
+#include "tmy.h"
+#include <string>
+#include <vector>
+#include "chunks.h"
+
+struct TMY::DirInfoEntry {
+	std::string path;
+	time_t modtime;
+	string md5,
+	int len,
+	/* ±£÷§chunks∞¥’’offset…˝–Ú≈≈–Ú */
+	std::vector<Chunks> chunks;
 };
 
-struct TMY::DirInfo_t {
-	
-}
+typedef share_ptr<DirInfoEntry> TMY::DirInfoEntry_ptr;
+typedef vector<DirInfoEntry_ptr> TMY::DirInfo;
+typedef share_ptr<DirInfo> TMY::DirInfo_ptr;
 
-typedef share_ptr<DirInfo> DirInfo_ptr;
+#endif
