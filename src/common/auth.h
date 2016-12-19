@@ -2,13 +2,17 @@
 #define __AUTH_H
 
 #include "tmy.h"
-#include <cstring>
+#include <string>
 
-struct TMY::DirInfo {
-	string username;
-	string passwd;
+namespace TMY {
+
+struct Auth {
+	std::string username;
+	std::string passwd;
 };
 
-typedef share_ptr<Auth> TMY::Auth_ptr;
+typedef std::share_ptr<Auth> Auth_ptr;
+
+}
 
 #endif

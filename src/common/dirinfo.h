@@ -1,22 +1,33 @@
-#ifndef __DIRINFO_H
+ï»¿#ifndef __DIRINFO_H
 #define __DIRINFO_H
 
 #include "tmy.h"
 #include <string>
 #include <vector>
 #include "chunks.h"
+#include "path.h"
+#include "json.hpp"
 
-struct TMY::DirInfoEntry {
-	std::string path;
+namespace TMY {
+
+struct DirInfoEntry {
+	FilePath filePath;
 	time_t modtime;
 	string md5,
 	int len,
-	/* ±£Ö¤chunks°´ÕÕoffsetÉıĞòÅÅĞò */
-	std::vector<Chunks> chunks;
+	/* ä¿è¯chunksæŒ‰ç…§offsetå‡åºæ’åº */
+	Chunks chunks;
+	json& toJSON();
 };
 
-typedef share_ptr<DirInfoEntry> TMY::DirInfoEntry_ptr;
-typedef vector<DirInfoEntry_ptr> TMY::DirInfo;
-typedef share_ptr<DirInfo> TMY::DirInfo_ptr;
+typedef std::shared_ptr<DirInfoEntry> DirInfoEntry_ptr;
 
+class DirInfo: std::vector<DirInfoEntry_ptr> {
+public:	
+	json toJSON();
+};
+
+typedef std::shared_ptr<DirInfo> DirInfo_ptr;
+
+}
 #endif

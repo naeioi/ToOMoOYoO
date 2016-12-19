@@ -5,14 +5,18 @@
 #include "pushreq.h"
 #include "pullreq.h"
 
-class TMY::Sender {
+namespace TMY {
+
+class Sender {
 private:
 	int fd;
 public:
 	int push(PushReq_ptr);
-	TMY::PullReq_ptr waitPull();
-	int sendDirInfo(TMY::DirInfo_ptr);
+	PullReq_ptr waitPull();
+	int sendDirInfo(DirInfo_ptr);
 	~Sender();
 };
+
+}
 
 #endif

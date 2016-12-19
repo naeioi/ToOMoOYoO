@@ -6,15 +6,18 @@
 #include <vector>
 #include "path.h"
 
-struct TMY::PushReqEntry {
-	TMY::FilePath filePath;
+namespace TMY {
+
+struct PushReqEntry {
+	FilePath filePath;
 	int offset;
 	int len;
 	char* buffer;
 };
 
-typedef share_ptr<TMY::PushReqEntry> TMY::PushReqEntry_ptr;
-typedef std::vector<PushReqEntry_ptr> TMY::PushReq;
-typedef share_ptr<PushReq> TMY::PushReq_ptr;
+typedef share_ptr<PushReqEntry> PushReqEntry_ptr;
+typedef std::vector<PushReqEntry_ptr> PushReq;
+typedef share_ptr<PushReq> PushReq_ptr;
 
+}
 #endif

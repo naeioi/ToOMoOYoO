@@ -3,10 +3,19 @@
 
 #include "tmy.h"
 
-struct TMY::Chunks {
+namespace TMY {
+
+struct Chunk {
 	int offset;
 	int len;
 };
-typedef share_ptr<Chunks> Chunks_ptr;
 
+class Chunks::public std::vector<Chunk> {
+public:
+	json toJSON();
+}
+
+typedef std::share_ptr<Chunks> Chunks_ptr;
+
+}
 #endif

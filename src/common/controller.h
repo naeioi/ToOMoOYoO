@@ -1,3 +1,6 @@
+#ifndef __CONTROLLER_H
+#define __CONTROLLER_H
+
 #include "tmy.h"
 #include "Receiver.h"
 #include "Sender.h"
@@ -15,4 +18,6 @@ public:
 	int setReceiverReqHandler(function<void(Receiver_ptr)>);
 	Sender_ptr makeSender(DirInfo_ptr dirInfo = nullptr);
 	int reconnect();
-}
+};
+
+#endif
