@@ -2,6 +2,8 @@
 #define __CHUNK_H
 
 #include "tmy.h"
+#include <vector>
+#include "json.hpp"
 
 namespace TMY {
 
@@ -10,12 +12,12 @@ struct Chunk {
 	int len;
 };
 
-class Chunks::public std::vector<Chunk> {
+class Chunks:public std::vector<Chunk> {
 public:
 	json toJSON();
-}
+};
 
-typedef std::share_ptr<Chunks> Chunks_ptr;
+typedef std::shared_ptr<Chunks> Chunks_ptr;
 
 }
 #endif

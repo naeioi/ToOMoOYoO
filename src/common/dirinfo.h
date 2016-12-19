@@ -13,11 +13,11 @@ namespace TMY {
 struct DirInfoEntry {
 	FilePath filePath;
 	time_t modtime;
-	string md5,
-	int len,
+	std::string md5;
+	int len;
 	/* 保证chunks按照offset升序排序 */
 	Chunks chunks;
-	json& toJSON();
+	json toJSON();
 };
 
 typedef std::shared_ptr<DirInfoEntry> DirInfoEntry_ptr;

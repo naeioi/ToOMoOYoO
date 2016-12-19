@@ -96,7 +96,6 @@ SOFTWARE.
 @since version 1.0.0
 */
 
-using namespace nlohmann;
 namespace nlohmann
 {
 
@@ -12199,5 +12198,7 @@ inline nlohmann::json::json_pointer operator "" _json_pointer(const char* s, std
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
     #pragma GCC diagnostic pop
 #endif
+
+using json = nlohmann::json;
 
 #endif

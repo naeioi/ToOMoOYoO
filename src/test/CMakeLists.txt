@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 2.6)
 PROJECT (TMY_TEST)
-# set(CMAKE_CURRENT_BINARY_DIR ${PROJECT_SOURCE_DIR}/build)
-# INCLUDE_DIRECTORIES(../common)
 
+# set(CMAKE_CURRENT_BINARY_DIR ${PROJECT_SOURCE_DIR}/build)
+# set(COMMON_DIR ../common)
+# INCLUDE_DIRECTORIES($(COMMON_DIR))
 SET(CMAKE_CXX_FLAGS  "-std=c++11")
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${CMAKE_LIBRARY_PATH})
 
 add_executable(hello hello.cpp)
-# add_executable(test_dirinfo dirinfo_t.cpp)
+add_executable(test_dirinfo dirinfo_t.cpp)
+target_link_libraries(test_dirinfo tmy_net)
