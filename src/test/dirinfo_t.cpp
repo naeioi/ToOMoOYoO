@@ -7,6 +7,13 @@
 using namespace std;
 using namespace TMY;
 
+/* 
+ * Test for 
+ *   chunks.cpp
+ *   dirinfo.cpp
+ *   path.cpp
+ */
+
 int main()
 {
     /*-------------*/
@@ -35,10 +42,10 @@ int main()
     /*-------------*/
     testbegin("Chunks");
 {
+    /* List initialization doesnt work */
     Chunks cs;
     cs.push_back({ 0, 1024 });
     cs.push_back({ 1024, 2048});
-    // vector<Chunk> cs({ { 0, 10 }, { 1024, 2048 } });
 
     printf("%s\n", cs.toJSON().dump(4).c_str());
 }   
