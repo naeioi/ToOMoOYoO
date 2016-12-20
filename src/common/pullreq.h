@@ -7,14 +7,19 @@
 #include <ctime>
 #include "path.h"
 
-struct TMY::PullReqEntry {
-	TMY::FilePath filePath;
+namespace TMY {
+
+/* 一条PullReq可能包含很多个PullReqEntry */
+struct PullReqEntry {
+	FilePath filePath;
 	int offset;
 	int len;
 };
 
-typedef std::share_ptr<PullReqEntry> TMY::PullReqEntry_ptr;
-typedef std::vector<TMY::PullReqEntry_ptr> TMY::PullReq;
-typedef std::share_ptr<TMY::PullReq> TMY::PullReq_ptr;
+typedef std::share_ptr<PullReqEntry> PullReqEntry_ptr;
+typedef std::vector<PullReqEntry> PullReq;
+typedef std::share_ptr<PullReq> PullReq_ptr;
 
+
+}
 #endif

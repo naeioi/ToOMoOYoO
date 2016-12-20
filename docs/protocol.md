@@ -3,7 +3,7 @@
 ## Controller <-> Controller
 - Register
 注册
-```json
+```js
 Regsiter\n
 {
     username: "naeioi",
@@ -12,7 +12,7 @@ Regsiter\n
 ```
 - RegsiterRes
 注册结果
-```json
+```js
 RegisterRes\n
 {
     /* code 
@@ -31,7 +31,7 @@ RegisterRes\n
 
 - Login
 登陆
-```json
+```js
 Login\n
 {
     username: "naeioi",
@@ -41,7 +41,7 @@ Login\n
 
 - LoginRes
 登陆结果
-```json
+```js
 LoginRes\n
 {
     /* code 
@@ -55,7 +55,7 @@ LoginRes\n
 ```
 - Tunnel
 在Sender和Receiver之间建立新通道
-```json
+```js
 Tunnel\n
 {
     /* role
@@ -75,7 +75,7 @@ Tunnel\n
 
 ## Sender->Receiver
 - DirInfo
-```json
+```js
 DirInfo\n
 [
     {
@@ -90,7 +90,7 @@ DirInfo\n
 ```
 
 - Push
-```json
+```js
 Push\n
 [
     {
@@ -107,7 +107,7 @@ Push\n
 
 ## Receiver->Sender
 - Pull
-```json
+```js
 Pull\n
 [
     {

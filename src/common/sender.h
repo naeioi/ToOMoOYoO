@@ -11,10 +11,13 @@ class Sender {
 private:
 	int fd;
 public:
-	int push(PushReq_ptr);
-	PullReq_ptr waitPull();
-	int sendDirInfo(DirInfo_ptr);
 	~Sender();
+
+	/* 以下函数都是阻塞的 */
+
+	int push(PushReq_ptr);	
+	int sendDirInfo(DirInfo);
+	PullReq waitPull();
 };
 
 }
