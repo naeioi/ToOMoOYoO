@@ -86,8 +86,6 @@
 
 #endif
 
-#define HELLO 1
-
 typedef struct sockaddr_in SA4;
 typedef struct sockaddr SA;
 

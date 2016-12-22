@@ -1,7 +1,6 @@
 #ifndef __LISTENER_H
 #define __LISTENER_H
-#include "tmy.h"
-#include "session.h"
+#include "net.h"
 #include "controller.h"
 #include <functional>
 

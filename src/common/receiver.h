@@ -1,10 +1,8 @@
 #ifndef __RECEIVER_H
 #define __RECEIVER_H
 
-#include "tmy.h"
+#include "net.h"
 #include <functional>
-#include "pushreq.h"
-#include "pullreq.h"
 // #include "progressinfo.h"
 
 namespace TMY {

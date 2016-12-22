@@ -1,0 +1,211 @@
+.
+├── build
+│   ├── CMakeCache.txt
+│   ├── CMakeFiles
+│   │   ├── 3.5.1
+│   │   │   ├── CMakeCCompiler.cmake
+│   │   │   ├── CMakeCXXCompiler.cmake
+│   │   │   ├── CMakeDetermineCompilerABI_C.bin
+│   │   │   ├── CMakeDetermineCompilerABI_CXX.bin
+│   │   │   ├── CMakeSystem.cmake
+│   │   │   ├── CompilerIdC
+│   │   │   │   ├── a.out
+│   │   │   │   └── CMakeCCompilerId.c
+│   │   │   └── CompilerIdCXX
+│   │   │       ├── a.out
+│   │   │       └── CMakeCXXCompilerId.cpp
+│   │   ├── cmake.check_cache
+│   │   ├── CMakeDirectoryInformation.cmake
+│   │   ├── CMakeOutput.log
+│   │   ├── CMakeTmp
+│   │   ├── feature_tests.bin
+│   │   ├── feature_tests.c
+│   │   ├── feature_tests.cxx
+│   │   ├── Makefile2
+│   │   ├── Makefile.cmake
+│   │   ├── progress.marks
+│   │   └── TargetDirectories.txt
+│   ├── cmake_install.cmake
+│   ├── common
+│   │   ├── CMakeFiles
+│   │   │   ├── CMakeDirectoryInformation.cmake
+│   │   │   ├── progress.marks
+│   │   │   └── tmy_net.dir
+│   │   │       ├── build.make
+│   │   │       ├── chunks.cpp.o
+│   │   │       ├── cmake_clean.cmake
+│   │   │       ├── cmake_clean_target.cmake
+│   │   │       ├── controller.cpp.o
+│   │   │       ├── CXX.includecache
+│   │   │       ├── DependInfo.cmake
+│   │   │       ├── depend.internal
+│   │   │       ├── depend.make
+│   │   │       ├── dirinfo.cpp.o
+│   │   │       ├── flags.make
+│   │   │       ├── link.txt
+│   │   │       ├── listener.cpp.o
+│   │   │       ├── path.cpp.o
+│   │   │       └── progress.make
+│   │   ├── cmake_install.cmake
+│   │   ├── libtmy_net.a
+│   │   └── Makefile
+│   ├── Makefile
+│   ├── server
+│   │   ├── CMakeFiles
+│   │   │   ├── CMakeDirectoryInformation.cmake
+│   │   │   ├── progress.marks
+│   │   │   └── tmy_server.dir
+│   │   │       ├── build.make
+│   │   │       ├── cmake_clean.cmake
+│   │   │       ├── cmake_clean_target.cmake
+│   │   │       ├── CXX.includecache
+│   │   │       ├── DependInfo.cmake
+│   │   │       ├── depend.internal
+│   │   │       ├── depend.make
+│   │   │       ├── flags.make
+│   │   │       ├── link.txt
+│   │   │       ├── logger.cpp.o
+│   │   │       └── progress.make
+│   │   ├── cmake_install.cmake
+│   │   ├── libtmy_server.a
+│   │   └── Makefile
+│   └── test
+│       ├── CMakeFiles
+│       │   ├── CMakeDirectoryInformation.cmake
+│       │   ├── hello.dir
+│       │   │   ├── build.make
+│       │   │   ├── cmake_clean.cmake
+│       │   │   ├── CXX.includecache
+│       │   │   ├── DependInfo.cmake
+│       │   │   ├── depend.internal
+│       │   │   ├── depend.make
+│       │   │   ├── flags.make
+│       │   │   ├── hello.cpp.o
+│       │   │   ├── link.txt
+│       │   │   └── progress.make
+│       │   ├── progress.marks
+│       │   ├── test_controller.dir
+│       │   │   ├── build.make
+│       │   │   ├── cmake_clean.cmake
+│       │   │   ├── controller_t.cpp.o
+│       │   │   ├── CXX.includecache
+│       │   │   ├── DependInfo.cmake
+│       │   │   ├── depend.internal
+│       │   │   ├── depend.make
+│       │   │   ├── flags.make
+│       │   │   ├── link.txt
+│       │   │   └── progress.make
+│       │   └── test_dirinfo.dir
+│       │       ├── build.make
+│       │       ├── cmake_clean.cmake
+│       │       ├── CXX.includecache
+│       │       ├── DependInfo.cmake
+│       │       ├── depend.internal
+│       │       ├── depend.make
+│       │       ├── dirinfo_t.cpp.o
+│       │       ├── flags.make
+│       │       ├── link.txt
+│       │       └── progress.make
+│       ├── cmake_install.cmake
+│       ├── hello
+│       ├── Makefile
+│       ├── test_controller
+│       └── test_dirinfo
+├── CMakeLists.txt
+├── common
+│   ├── auth.h
+│   ├── buffer.h
+│   ├── chunks.cpp
+│   ├── chunks.h
+│   ├── CMakeLists.txt
+│   ├── controller.cpp
+│   ├── controller.h
+│   ├── dirinfo.cpp
+│   ├── dirinfo.h
+│   ├── json.hpp
+│   ├── listener.cpp
+│   ├── listener.h
+│   ├── loginres.h
+│   ├── net.h
+│   ├── path.cpp
+│   ├── path.h
+│   ├── pullreq.h
+│   ├── pushreq.h
+│   ├── receiver.h
+│   ├── sender.h
+│   ├── session.h
+│   ├── signupres.h
+│   ├── tmy.h
+│   └── tsock.h
+├── main.cpp
+├── Qt client
+│   ├── dirscanner.cpp
+│   ├── dirscanner.h
+│   ├── logger.cpp
+│   └── logger.h
+├── server
+│   ├── CMakeLists.txt
+│   ├── logger.cpp
+│   ├── logger.h
+│   └── server.cpp
+├── test
+│   ├── build
+│   │   ├── CMakeCache.txt
+│   │   ├── CMakeFiles
+│   │   │   ├── 3.5.1
+│   │   │   │   ├── CMakeCCompiler.cmake
+│   │   │   │   ├── CMakeCXXCompiler.cmake
+│   │   │   │   ├── CMakeDetermineCompilerABI_C.bin
+│   │   │   │   ├── CMakeDetermineCompilerABI_CXX.bin
+│   │   │   │   ├── CMakeSystem.cmake
+│   │   │   │   ├── CompilerIdC
+│   │   │   │   │   ├── a.out
+│   │   │   │   │   └── CMakeCCompilerId.c
+│   │   │   │   └── CompilerIdCXX
+│   │   │   │       ├── a.out
+│   │   │   │       └── CMakeCXXCompilerId.cpp
+│   │   │   ├── cmake.check_cache
+│   │   │   ├── CMakeDirectoryInformation.cmake
+│   │   │   ├── CMakeOutput.log
+│   │   │   ├── CMakeTmp
+│   │   │   ├── feature_tests.bin
+│   │   │   ├── feature_tests.c
+│   │   │   ├── feature_tests.cxx
+│   │   │   ├── hello.dir
+│   │   │   │   ├── build.make
+│   │   │   │   ├── cmake_clean.cmake
+│   │   │   │   ├── CXX.includecache
+│   │   │   │   ├── DependInfo.cmake
+│   │   │   │   ├── depend.internal
+│   │   │   │   ├── depend.make
+│   │   │   │   ├── flags.make
+│   │   │   │   ├── hello.cpp.o
+│   │   │   │   ├── link.txt
+│   │   │   │   └── progress.make
+│   │   │   ├── Makefile2
+│   │   │   ├── Makefile.cmake
+│   │   │   ├── progress.marks
+│   │   │   ├── TargetDirectories.txt
+│   │   │   └── test_dirinfo.dir
+│   │   │       ├── build.make
+│   │   │       ├── cmake_clean.cmake
+│   │   │       ├── CXX.includecache
+│   │   │       ├── DependInfo.cmake
+│   │   │       ├── depend.internal
+│   │   │       ├── depend.make
+│   │   │       ├── dirinfo_t.cpp.o
+│   │   │       ├── flags.make
+│   │   │       ├── link.txt
+│   │   │       └── progress.make
+│   │   ├── cmake_install.cmake
+│   │   ├── hello
+│   │   ├── Makefile
+│   │   └── test_dirinfo
+│   ├── CMakeLists.txt
+│   ├── controller_t.cpp
+│   ├── dirinfo_t.cpp
+│   ├── hello.cpp
+│   └── test.hpp
+└── tree.txt
+
+29 directories, 179 files

@@ -10,16 +10,4 @@
 extern int tmyerrono; /* Global error code */
 extern char *tmyerrstr; /* global error string */
 
-namespace TMY {
-	namespace net {
-		class Controller;
-		class Receiver;
-		class Sender;
-		class Listener;
-	}
-	struct Session;
-	struct Auth;
-	struct DirInfo;
-};
-
 #endif

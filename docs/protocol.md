@@ -13,7 +13,7 @@ Regsiter\n
 - RegsiterRes
 注册结果
 ```js
-RegisterRes\n
+SignupRes\n
 {
     /* code 
      * 0 成功

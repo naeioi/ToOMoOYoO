@@ -1,9 +1,7 @@
 #ifndef __SENDER_H
 #define __SENDER_H
 
-#include "tmy.h"
-#include "pushreq.h"
-#include "pullreq.h"
+#include "net.h"
 
 namespace TMY {
 

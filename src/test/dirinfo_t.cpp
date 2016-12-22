@@ -1,7 +1,4 @@
-#include "common/dirinfo.h"
-#include "common/path.h"
-#include "common/chunks.h"
-#include "common/json.hpp"
+#include "common/packets.h"
 #include <string>
 #include "test.hpp"
 using namespace std;

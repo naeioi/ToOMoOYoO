@@ -1,17 +1,15 @@
-#include "tmy.h"
 #include "net.h"
-#include "../server/logger.h"
 #include <cstring>
+#include <exception>
 using namespace std;
 
 namespace TMY {
 
 Controller::Controller(int fd_, const SA4 addr_, socklen_t addrlen_) {
     if(addrlen_ != sizeof(SA4))
-        fatal("Accept only ipv4");
+        throw new std::exception();
 
     memcpy(&addr, &addr_, sizeof(SA4));
-    logger("In controller ctor");
 }
 
 /* TODO */
@@ -23,11 +21,11 @@ int Controller::reconnect() {
     return 0;
 }
 
-SignupRes Controller::signup(string username, string password) {
+SignupRes Controller::signup(const string& username, const string& password) {
     return {0, "", ""};
 }
 
-LoginRes Controller::login(string username, string password) {
+LoginRes Controller::login(const string& username, const string& password) {
     return {0, "", ""};
 }
 
