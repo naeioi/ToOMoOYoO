@@ -4,12 +4,15 @@
 #include "tmy.h"
 #include <ctime>
 
-typedef struct TMY::Session {
+namespace TMY {
+
+typedef struct Session {
 	int uid;
 	int sessionid;
 	time_t estime; /* established time */
 } Session;
 
-typedef share_ptr<Session> TMY::Session_ptr;
+typedef std::shared_ptr<Session> Session_ptr;
 
+}
 #endif

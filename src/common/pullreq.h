@@ -16,9 +16,9 @@ struct PullReqEntry {
 	int len;
 };
 
-typedef std::share_ptr<PullReqEntry> PullReqEntry_ptr;
+typedef std::shared_ptr<PullReqEntry> PullReqEntry_ptr;
 typedef std::vector<PullReqEntry> PullReq;
-typedef std::share_ptr<PullReq> PullReq_ptr;
+typedef std::shared_ptr<PullReq> PullReq_ptr;
 
 
 }

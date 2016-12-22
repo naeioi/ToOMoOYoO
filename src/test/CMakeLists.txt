@@ -10,4 +10,6 @@ include_directories(${CMAKE_LIBRARY_PATH})
 
 add_executable(hello hello.cpp)
 add_executable(test_dirinfo dirinfo_t.cpp)
+add_executable(test_controller controller_t.cpp)
 target_link_libraries(test_dirinfo tmy_net)
+target_link_libraries(test_controller tmy_net tmy_server)

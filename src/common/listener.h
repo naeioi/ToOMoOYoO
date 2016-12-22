@@ -2,6 +2,7 @@
 #define __LISTENER_H
 #include "tmy.h"
 #include "session.h"
+#include "controller.h"
 #include <functional>
 
 namespace TMY {
@@ -10,7 +11,9 @@ namespace TMY {
 
 class Listener {
 private:
+    int fd;
 public:
+    Listener(): fd(-1) {}
     int listen(int port);
     //void setAuthService();
     Controller_ptr waitClient();

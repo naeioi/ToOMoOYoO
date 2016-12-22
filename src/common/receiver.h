@@ -20,5 +20,7 @@ public:
 	~Receiver();
 };
 
+typedef std::shared_ptr<Receiver> Receiver_ptr;
+
 }
 #endif

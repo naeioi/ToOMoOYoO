@@ -2,10 +2,10 @@
 #define __LOGINRES_H
 
 #include "tmy.h"
-#include "registerres.h"
+#include "signupres.h"
 
 namespace TMY {
-    typedef ResgisterRes LoginRes;
+    typedef SignupRes LoginRes;
 }
 
 #endif

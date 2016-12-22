@@ -20,6 +20,8 @@ public:
 	PullReq waitPull();
 };
 
+typedef std::shared_ptr<Sender> Sender_ptr;
+
 }
 
 #endif

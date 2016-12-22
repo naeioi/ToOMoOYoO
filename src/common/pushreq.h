@@ -12,12 +12,12 @@ struct PushReqEntry {
 	FilePath filePath;
 	int offset;
 	int len;
-	Buffer buffer;
+	const char* buffer;
 };
 
-typedef share_ptr<PushReqEntry> PushReqEntry_ptr;
+typedef std::shared_ptr<PushReqEntry> PushReqEntry_ptr;
 typedef std::vector<PushReqEntry> PushReq;
-typedef share_ptr<PushReq> PushReq_ptr;
+typedef std::shared_ptr<PushReq> PushReq_ptr;
 
 }
 #endif

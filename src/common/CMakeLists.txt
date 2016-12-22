@@ -7,4 +7,4 @@ PROJECT (tmy_net)
 
 SET(CMAKE_CXX_FLAGS  "-std=c++11")
 
-add_library(tmy_net path.cpp dirinfo.cpp chunks.cpp)
+add_library(tmy_net path.cpp dirinfo.cpp chunks.cpp controller.cpp listener.cpp)

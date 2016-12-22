@@ -7,9 +7,6 @@
 
 #include <memory>
 
-typedef struct sockaddr_in SA4;
-typedef struct sockaddr SA;
-
 extern int tmyerrono; /* Global error code */
 extern char *tmyerrstr; /* global error string */
 

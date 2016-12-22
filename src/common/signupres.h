@@ -3,7 +3,7 @@
 #include <string>
 
 namespace TMY {
-    struct ResgisterRes{
+    struct SignupRes {
         int code;
         std::string message;
         std::string session;
