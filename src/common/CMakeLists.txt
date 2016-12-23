@@ -7,4 +7,4 @@ PROJECT (tmy_net)
 
 SET(CMAKE_CXX_FLAGS  "-std=c++11")
 
-add_library(tmy_net packets.cpp controller.cpp listener.cpp)
+add_library(tmy_net packets.cpp controller.cpp listener.cpp tsock.cpp)

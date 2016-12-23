@@ -1,11 +1,10 @@
-#include "common/tmy.h"
+﻿#include "common/tmy.h"
 #include "common/net.h"
 #include "server/logger.h"
 using namespace TMY;
 
 void clientHandler(Controller_ptr cli) {
     logger("In child: client");
-    
 }
 
 #define DEFAULT_PORT 2222

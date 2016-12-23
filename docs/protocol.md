@@ -4,13 +4,13 @@
 - Register
 注册
 ```js
-Regsiter\n
+Signup\n
 {
     username: "naeioi",
     password: "ToOMoOYoO"
 }\0
 ```
-- RegsiterRes
+- SignupRes
 注册结果
 ```js
 SignupRes\n

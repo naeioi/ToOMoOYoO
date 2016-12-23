@@ -1,7 +1,6 @@
-
+﻿
 #include "net.h"
 #include "controller.h"
-using namespace std;
 
 namespace TMY {
 
@@ -32,12 +31,12 @@ Controller_ptr Listener::waitClient() {
     SA4 cliaddr;
     socklen_t len;
     int clifd = accept(fd, (SA*)&cliaddr, &len);
-    make_shared<Controller>(clifd, cliaddr, len);
+    std::make_shared<Controller>(clifd, (const SA*)&cliaddr, len);
     return nullptr;
 }
 
 void Listener::close() {
-    ::close(fd);
+    ::tclose(fd);
 }
 
 }

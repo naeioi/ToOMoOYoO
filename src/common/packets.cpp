@@ -1,4 +1,4 @@
-#include "tmy.h"
+﻿#include "tmy.h"
 #include "packets.h"
 #include "json.hpp"
 using namespace TMY;
@@ -27,7 +27,14 @@ json DirInfoEntry::toJSON() {
     /* "2011-10-08T07:07:09Z" */
     /* http://stackoverflow.com/questions/9527960/how-do-i-construct-an-iso-8601-datetime-in-c */
     char timebuf[25];
-    strftime(timebuf, sizeof(timebuf), "%FT%TZ", localtime(&modtime));
+
+	struct tm _tm;
+#ifdef _WIN32
+	localtime_s(&_tm, &modtime);
+    strftime(timebuf, sizeof(timebuf), "%FT%TZ", &_tm);
+#elif __linux__
+	strftime(timebuf, sizeof(timebuf), "%FT%TZ", localtime(&modtime));
+#endif
 
     return json({
         {"modtime", timebuf},

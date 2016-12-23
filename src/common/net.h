@@ -1,5 +1,4 @@
-#ifndef __NET_H
-#define __NET_H
+﻿#pragma once
 
 #include "tmy.h"
 #include "tsock.h"
@@ -8,5 +7,3 @@
 #include "receiver.h"
 #include "sender.h"
 #include "packets.h"
-
-#endif

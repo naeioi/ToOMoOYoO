@@ -1,6 +1,5 @@
-/* 封装所有自定义数据类型 */
-#ifndef __PACKETS_H
-#define __PACKETS_H
+﻿/* 封装所有自定义数据类型 */
+#pragma once
 #include "tmy.h"
 #include "json.hpp"
 #include <exception>
@@ -89,6 +88,16 @@ public:
 typedef std::shared_ptr<DirInfo> DirInfo_ptr;
 
 /* -------------- *
+ *    SignupReq
+ *    LoginReq
+ *----------------*/
+struct SignupReq {
+    std::string username;
+    std::string password;
+};
+typedef SignupReq LoginReq;
+
+/* -------------- *
  *    SignupRes
  *    LoginRes
  *----------------*/
@@ -141,4 +150,3 @@ struct Session {
 };
 
 typedef std::shared_ptr<Session> Session_ptr;
-#endif

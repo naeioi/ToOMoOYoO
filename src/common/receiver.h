@@ -1,7 +1,7 @@
-#ifndef __RECEIVER_H
-#define __RECEIVER_H
+﻿#pragma once
 
-#include "net.h"
+#include "receiver.h"
+#include "packets.h"
 #include <functional>
 // #include "progressinfo.h"
 
@@ -12,13 +12,12 @@ private:
 	int fd;
 public:
 
-	DirInfo waitDirInfo();
-	int sendPull(const PullReq);
-	PushReq_ptr waitPush();
+	int waitDirInfo(DirInfo&);
+	int sendPull(const PullReq&);
+	int waitPush(PushReq_ptr&);
 	~Receiver();
 };
 
 typedef std::shared_ptr<Receiver> Receiver_ptr;
 
 }
-#endif

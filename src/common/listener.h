@@ -1,7 +1,6 @@
-#ifndef __LISTENER_H
-#define __LISTENER_H
-#include "net.h"
+﻿#pragma once
 #include "controller.h"
+#include "listener.h"
 #include <functional>
 
 namespace TMY {
@@ -13,12 +12,11 @@ private:
     int fd;
 public:
     Listener(): fd(-1) {}
-    int listen(int port);
-    //void setAuthService();
-    Controller_ptr waitClient();
+
+	Controller_ptr waitClient();
+	int listen(int port);
+	
     void close();
 };
 
 }
-
-#endif

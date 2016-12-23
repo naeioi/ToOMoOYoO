@@ -1,13 +1,12 @@
-#ifndef __TMY_H
-#define __TMY_H
+﻿#pragma once
 
 /* 指定是客户机/服务器代码 */
-// #define CLIENT
-// #define SERVER
+// #define ISCLIENT
+// #define ISSERVER
 
 #include <memory>
 
 extern int tmyerrono; /* Global error code */
 extern char *tmyerrstr; /* global error string */
 
-#endif
+#define DEBUG
