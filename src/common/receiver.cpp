@@ -39,7 +39,7 @@ int Receiver::waitDirInfo(DirInfo& dirinfo) {
 		return TCLOSE;
 	if (m < 0)
 		return m;
-	msg[m - 1] = 0;
+	if (!*msg.rbegin() == BRKCHR) *msg.rbegin() = 0;
 
 	/* parse */
 
@@ -121,7 +121,7 @@ int Receiver::waitPush(PushReq& pushreq) {
 		return TCLOSE;
 	if (m < 0)
 		return m;
-	msg[m - 1] = 0;
+	if (!*msg.rbegin() == BRKCHR) *msg.rbegin() = 0;
 
 	pushreq.clear();
 	json header = json::parse(msg.c_str());

@@ -96,7 +96,7 @@ int Sender::waitPull(PullReq& pullreq) {
 		return TCLOSE;
 	if (m < 0)
 		return m;
-	msg[m - 1] = 0;
+	if (!*msg.rbegin() == BRKCHR) *msg.rbegin() = 0;
 
 	/* parse */
 

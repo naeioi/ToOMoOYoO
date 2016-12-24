@@ -207,7 +207,7 @@ int Controller::login(const LoginReq& loginReq, LoginRes& loginRes) {
 	if (m == 0)
 		return TCLOSE;
 
-	msg[m - 1] = 0;
+	if (!*msg.rbegin() == BRKCHR) *msg.rbegin() = 0;
 	json loginres_ = json::parse(msg.c_str());
 	loginRes = { loginres_["code"], loginres_["message"], loginres_["session"] };
 
@@ -267,7 +267,7 @@ int Controller::waitLoginSignup(LoginReq& loginReq, int &type) {
 	if (m < 0)
 		return m;
 
-	msg[m - 1] = 0;
+	if (!*msg.rbegin() == BRKCHR) *msg.rbegin() = 0;
 	auto loginReq_ = json::parse(msg.c_str());
 	loginReq = {
 		loginReq_["username"],
