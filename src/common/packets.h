@@ -48,7 +48,7 @@ struct Chunk {
 
 class Chunks:public std::vector<Chunk> {
 public:
-	json toJSON();
+	json toJSON() const;
 };
 
 typedef std::shared_ptr<Chunks> Chunks_ptr;
@@ -60,10 +60,12 @@ typedef std::vector<std::string> PathArr;
 struct FilePath {
     std::string filename;
     PathArr pathArr;
-    json toJSON();
+    json toJSON() const;
 };
 typedef std::shared_ptr<FilePath> FilePath_ptr;
 }
+
+PathArr str2PathArr(const std::string &s);
 
 /* ------------ *
  *    DirInfo
@@ -75,14 +77,22 @@ struct DirInfoEntry {
 	int len;
 	/* 保证chunks按照offset升序排序 */
 	TMY::Chunks chunks;
-	json toJSON();
+	json toJSON() const;
 };
 
 typedef std::shared_ptr<DirInfoEntry> DirInfoEntry_ptr;
 
-class DirInfo: std::vector<DirInfoEntry_ptr> {
+class DirInfo: private std::vector<DirInfoEntry> {
+private:
+	typedef DirInfoEntry_ptr T;
+	typedef std::vector<DirInfoEntry> vector;
 public:	
-	json toJSON();
+	using vector::push_back;
+	using vector::operator[];
+	using vector::begin;
+	using vector::end;
+	using vector::size;
+	json toJSON() const;
 };
 
 typedef std::shared_ptr<DirInfo> DirInfo_ptr;
@@ -94,6 +104,7 @@ typedef std::shared_ptr<DirInfo> DirInfo_ptr;
 struct SignupReq {
     std::string username;
     std::string password;
+	std::string session;
 };
 typedef SignupReq LoginReq;
 
@@ -129,7 +140,7 @@ typedef std::shared_ptr<PullReq> PullReq_ptr;
  *----------------*/
 
 struct PushReqEntry {
-	TMY::FilePath filePath;
+	FilePath filePath;
 	int offset;
 	int len;
 	const char* buffer;

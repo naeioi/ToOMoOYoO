@@ -1,7 +1,13 @@
 ﻿#pragma once
 enum TsockErr {
-	TOK = 0, TTIMEOUT, TERROR, TCLOSE
+	TOK = 0, TTIMEOUT, TERROR, TCLOSE, TNOSESSION
 };
+
+#ifdef DEBUG
+#define BRKCHR '#'
+#else
+#define BRKCHR '\0'
+#endif
 
 #ifdef _WIN32
 
@@ -159,9 +165,9 @@ typedef struct sockaddr SA;
 #define TREAD 1
 #define TWRITE 2
 
-static timeval _default_to = { 1, 0 }, *_defalt_to_p = &_default_to;
+static timeval _default_to = { 1, 0 }, *_default_to_p = &_default_to;
 
-inline int blockt(int fd, int io, const timeval *timeout = _defalt_to_p) {
+inline int blockt(int fd, int io, const timeval *timeout = _default_to_p) {
 	FD_SET rset, wset, *_rset = NULL, *_wset = NULL;
 	
 	if (io & TREAD) {
@@ -182,3 +188,16 @@ inline int blockt(int fd, int io, const timeval *timeout = _defalt_to_p) {
 	flags |= (io & TWRITE) && FD_ISSET(fd, _wset) ? TWRITE : 0;
 	return flags;
 }
+
+inline int sendn(int fd, const char *buf, int len, bool blocking = 0, const timeval *timeout = _default_to_p) {
+	int n = 0, m = 0;
+	while (n < len) {
+		if (!(blockt(fd, TWRITE, timeout) | TWRITE))
+			return TTIMEOUT;
+		if ((m = send(fd, buf + n, len - n, 0)) < 0)
+			return -1;
+		n += m;
+	}
+	return 0;
+}
+

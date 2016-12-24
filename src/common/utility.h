@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "net.h"
+#include <string>
 
 template <int const N>
 class Readbuf {
@@ -96,3 +97,11 @@ int Readbuf<N>::readto(char *b, char det) {
 
 #define READBUFN 2048
 typedef Readbuf<READBUFN> Readbuf_;
+
+inline std::string time2str(const time_t &t) {
+	char buf[30];
+	tm tm_;
+	localtime_s(&tm_, &t);
+	strftime(buf, 20, "%Y-%m-%dT%H:%M:%SZ", &tm_);
+	return std::string(buf);
+}

@@ -9,6 +9,7 @@ namespace TMY {
 
 /* 初次，增量，恢复 */
 enum TunnelMode { INIT, INCR, RECV };
+enum TunnelRole { SENDER = 0, RECEIVER = 1 };
 
 class Controller;
 typedef std::shared_ptr<Controller> Controller_ptr;
@@ -18,11 +19,13 @@ class Controller {
 private:
 	int fd;
 	SA addr;
-	Session session;
+	//Session session;
+	std::string session;
 public:
 	/* 以auth为凭证连接addr，同时设置对方要求建立receiver时的handler
 	 * 失败返回 nullptr 
 	 */
+
 	Controller(int fd_, const SA* addr_, socklen_t addrlen_);
 	static int connect(const SA* addr, Controller_ptr&, bool blocking = 0, timeval timeout = { 1, 0 });
 
@@ -42,8 +45,8 @@ public:
 	 * 见protocol.md
 	 */
 	/* 小心：register是保留字 */
-	int signup(const std::string& username, const std::string& password, SignupRes&);
-	int login(const std::string& username, const std::string& password, LoginRes&);
+	int signup(const SignupReq&, SignupRes&);
+	int login(const LoginReq&, LoginRes&);
 
 	/*----------- Server用函数-------------*/
 

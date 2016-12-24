@@ -23,8 +23,11 @@ int main()
 
 	printf("Connected !\n");
 	LoginRes loginres;
-	LoginReq loginReq;
-	//controller->login("naeioi", "rocket", loginres);
-	controller->waitLogin(loginReq);
+	LoginReq loginReq = {"naeioi", "rocket", ""};
+	SignupReq signupReq = { "naeioi", "rocket", "" };
+	SignupRes signuperes;
+	controller->login(loginReq, loginres);
+	controller->signup(signupReq, signuperes);
+	controller->makeReceiver(INIT, )
 	return 0;
 }

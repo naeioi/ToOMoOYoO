@@ -6,7 +6,7 @@ using namespace TMY;
 /* ---------- *
  *    Chunks
  *------------*/
-json Chunks::toJSON() {
+json Chunks::toJSON() const {
     json r;
 		for(auto &c:*this) {
 			r.push_back({
@@ -21,7 +21,7 @@ json Chunks::toJSON() {
  *  DirInfo
  *------------*/
 
-json DirInfoEntry::toJSON() {
+json DirInfoEntry::toJSON() const {
     json _filePath = std::move(filePath.toJSON());
 
     /* "2011-10-08T07:07:09Z" */
@@ -46,10 +46,10 @@ json DirInfoEntry::toJSON() {
     /* Dont send chunks */
 }
 
-json DirInfo::toJSON() {
+json DirInfo::toJSON() const {
     json r;
     for(int i = 0; i < size(); i++){
-        r.push_back(std::move(at(i)->toJSON()));
+        r.push_back(std::move(at(i).toJSON()));
     }
     return r;
 }
@@ -58,7 +58,7 @@ json DirInfo::toJSON() {
  *  FilePath
  *------------*/
 
-json FilePath::toJSON() {
+json FilePath::toJSON() const {
     std::string path = "";
 
     for(auto &dir: pathArr)
@@ -68,4 +68,20 @@ json FilePath::toJSON() {
         {"filename", filename},
         { "path", path }
     });
+}
+
+PathArr str2PathArr(const std::string &s) {
+	PathArr r;
+	std::string dir = "";
+	for (int i = 1; i < s.size(); i++) {
+		if (s[i] == '\/') {
+			r.push_back(dir);
+			dir = "";
+		}
+		else dir += s[i];
+	}
+
+	if (!dir.empty())
+		r.push_back(dir);
+	return r;
 }
