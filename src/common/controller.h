@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "tsock.h"
 #include "packets.h"
 #include "sender.h"
 #include "receiver.h"

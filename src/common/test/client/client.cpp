@@ -26,8 +26,25 @@ int main()
 	LoginReq loginReq = {"naeioi", "rocket", ""};
 	SignupReq signupReq = { "naeioi", "rocket", "" };
 	SignupRes signuperes;
+	Receiver_ptr receiver;
+	Sender_ptr sender;
+	PullReq pullreq = { { {"v.mp4", {"video", "files"}}, 0, 10 } };
+	DirInfo dirinfo;
+	PushReq pushreq;
+
 	controller->login(loginReq, loginres);
 	controller->signup(signupReq, signuperes);
-	controller->makeReceiver(INIT, )
+	/* receiver test */
+	controller->makeReceiver(INIT, receiver);
+	receiver->sendPull(pullreq);
+	receiver->waitDirInfo(dirinfo);
+	receiver->waitPush(pushreq);
+		
+	/* sender test */
+	pushreq = { { { "v.mp4",{ "video", "files" } }, 0, 10, "hello, world" } };
+	controller->makeSender(INIT, sender);
+	sender->push(pushreq);
+	sender->sendDirInfo(dirinfo);
+	sender->waitPull(pullreq);
 	return 0;
 }

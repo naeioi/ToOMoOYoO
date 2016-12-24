@@ -29,7 +29,7 @@ Readbuf<N>::Readbuf(int fd_) {
 }
 
 template <int N>
-int Readbuf<N>::readto(char *b, char det, bool blocking = false) {
+int Readbuf<N>::readto(char *b, char det) {
 
 	if (det != lastdet && t-buf > 0) {
 		int n = t - buf;

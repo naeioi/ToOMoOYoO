@@ -70,11 +70,13 @@ json FilePath::toJSON() const {
     });
 }
 
-PathArr str2PathArr(const std::string &s) {
+
+PathArr TMY::str2PathArr(const std::string & s)
+{
 	PathArr r;
 	std::string dir = "";
 	for (int i = 1; i < s.size(); i++) {
-		if (s[i] == '\/') {
+		if (s[i] == '/') {
 			r.push_back(dir);
 			dir = "";
 		}

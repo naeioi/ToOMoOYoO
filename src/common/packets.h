@@ -63,7 +63,7 @@ struct FilePath {
     json toJSON() const;
 };
 typedef std::shared_ptr<FilePath> FilePath_ptr;
-}
+
 
 PathArr str2PathArr(const std::string &s);
 
@@ -162,3 +162,5 @@ struct Session {
 };
 
 typedef std::shared_ptr<Session> Session_ptr;
+
+}

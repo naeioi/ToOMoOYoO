@@ -54,7 +54,7 @@ int Receiver::waitDirInfo(DirInfo& dirinfo) {
 	for (auto &e : header) {
 		DirInfoEntry h;
 		h.len = e["len"];
-		h.md5 = string(e["md5"]);
+		h.md5 = e["md5"].dump();
 		h.filePath.filename = e["filename"].dump();
 		h.filePath.pathArr = move(str2PathArr(e["path"].dump()));
 		dirinfo.push_back(h);

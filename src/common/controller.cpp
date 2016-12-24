@@ -1,5 +1,7 @@
-﻿#include "net.h"
-#include "controller.h"
+﻿#include "controller.h"
+#include "packets.h"
+#include "receiver.h"
+#include "sender.h"
 #include "logger.h"
 #include "utility.h"
 #include <cstring>
@@ -72,13 +74,10 @@ int Controller::connect(const SA* addr, Controller_ptr& controller, bool blockin
 int Controller::reconnect() {
 	tclose(fd);
 
-	shared_ptr<Controller> nc;
-
 	int n;
-	if ((n = connect(&addr, nc)) != 0)
+	if ((n = connectto(fd, &addr, blocking, timeout)) != 0)
 		return n;
 
-	*this = *nc;
 	return 0;
 }
 
@@ -258,7 +257,8 @@ int Controller::makeSender(TunnelMode mode, Sender_ptr& sender) {
 	msg += header.dump();
 	msg += "\0";
 
-	int n = 0, m = 0, len = msg.size() + 1;
+	n = 0;
+	int m = 0, len = msg.size() + 1;
 	while (n < len) {
 		if (!(blockt(fd, TWRITE, &timeout) | TWRITE))
 			return TTIMEOUT;
@@ -290,7 +290,8 @@ int Controller::makeReceiver(TunnelMode mode, Receiver_ptr& receiver) {
 	msg += header.dump();
 	msg += "\0";
 
-	int n = 0, m = 0, len = msg.size() + 1;
+	n = 0;
+	int m = 0, len = msg.size() + 1;
 	while (n < len) {
 		if (!(blockt(fd, TWRITE, &timeout) | TWRITE))
 			return TTIMEOUT;

@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-#include "controller.h"
 #include "sender.h"
 #include "packets.h"
 #include <string>
 
 namespace TMY {
 
+class Controller;
 class Sender {
 	friend class Controller;
 private:
