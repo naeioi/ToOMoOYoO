@@ -1,6 +1,7 @@
 ﻿#include "tmy.h"
 #include "packets.h"
 #include "json.hpp"
+#include "time.h"
 using namespace TMY;
 
 /* ---------- *
@@ -86,4 +87,11 @@ PathArr TMY::str2PathArr(const std::string & s)
 	if (!dir.empty())
 		r.push_back(dir);
 	return r;
+}
+
+time_t TMY::str2time(const std::string &s) {
+	tm _tm;
+	std::istringstream ss(s);
+	ss >> std::get_time(&_tm, "%Y-%m-%dT%H:%M:%SZ"); // or just %T in this case
+	return mktime(&_tm);
 }

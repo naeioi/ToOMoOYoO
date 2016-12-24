@@ -12,7 +12,10 @@ private:
     char *t;
 public:
     Readbuf(int fd_);
+	/* return len */
     int readto(char *b, char det = '\0');
+	/* return 0 for success */
+	int readn(char *b, int len);
     //int readn(char *b, int len);
 
     bool blocking;
@@ -26,6 +29,22 @@ Readbuf<N>::Readbuf(int fd_) {
 	timeout = { 1, 0 };
 	t = buf;
 	fd = fd_;
+}
+
+template <int N>
+int Readbuf<N>::readn(char *b, int len) {
+	int n = t - buf;
+	if (n >= len) {
+		memcpy(b, buf, len);
+		memcpy(buf, buf + len, n - len);
+	}
+	else {
+		int m = len - n;
+		if (::readn(fd, buf + n, m) < 0)
+			return -1;
+		memcpy(buf, b, len);
+	}
+	return 0;
 }
 
 template <int N>
@@ -103,9 +122,9 @@ int Readbuf<N>::readto(char *b, char det) {
 typedef Readbuf<READBUFN> Readbuf_;
 
 inline std::string time2str(const time_t &t) {
-	char buf[30];
+	char buf[50];
 	tm tm_;
 	localtime_s(&tm_, &t);
-	strftime(buf, 20, "%Y-%m-%dT%H:%M:%SZ", &tm_);
+	strftime(buf, 50, "%Y-%m-%dT%H:%M:%SZ", &tm_);
 	return std::string(buf);
 }

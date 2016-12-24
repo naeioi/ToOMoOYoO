@@ -23,9 +23,7 @@ int Receiver::waitDirInfo(DirInfo& dirinfo) {
 	if (m < 0)
 		return TTIMEOUT;
 
-	*msg.rbegin() = 0;
-
-	if (msg != "DirInfo") {
+	if (msg != "DirInfo\n") {
 		logger("Received %s but expect DirInfo", msg.c_str());
 		return TERROR;
 	}
@@ -41,7 +39,7 @@ int Receiver::waitDirInfo(DirInfo& dirinfo) {
 		return TCLOSE;
 	if (m < 0)
 		return m;
-	*msg.rbegin() = 0;
+	msg[m - 1] = 0;
 
 	/* parse */
 
@@ -54,9 +52,10 @@ int Receiver::waitDirInfo(DirInfo& dirinfo) {
 	for (auto &e : header) {
 		DirInfoEntry h;
 		h.len = e["len"];
-		h.md5 = e["md5"].dump();
-		h.filePath.filename = e["filename"].dump();
-		h.filePath.pathArr = move(str2PathArr(e["path"].dump()));
+		h.md5 = e["md5"].get<string>();
+		h.modtime = str2time(e["modtime"].get<string>());
+		h.filePath.filename = e["filename"].get<string>();
+		h.filePath.pathArr = move(str2PathArr(e["path"].get<string>()));
 		dirinfo.push_back(h);
 	}
 
@@ -106,9 +105,7 @@ int Receiver::waitPush(PushReq& pushreq) {
 	if (m < 0)
 		return TTIMEOUT;
 
-	*msg.rbegin() = 0;
-
-	if (msg != "Push") {
+	if (msg != "Push\n") {
 		logger("Received %s but expect Push", msg.c_str());
 		return TERROR;
 	}
@@ -124,7 +121,7 @@ int Receiver::waitPush(PushReq& pushreq) {
 		return TCLOSE;
 	if (m < 0)
 		return m;
-	*msg.rbegin() = 0;
+	msg[m - 1] = 0;
 
 	pushreq.clear();
 	json header = json::parse(msg.c_str());
@@ -136,15 +133,16 @@ int Receiver::waitPush(PushReq& pushreq) {
 		PushReqEntry h;
 		h.len = e["len"];
 		h.offset = e["offset"];
-		h.filePath.filename = e["filename"].dump();
-		h.filePath.pathArr = move(str2PathArr(e["path"].dump()));
-		pushreq.push_back(h);
+		h.filePath.filename = e["filename"].get<string>();
+		h.filePath.pathArr = move(str2PathArr(e["path"].get<string>()));
 		h.buffer = new char[h.len];
 
 		int n;
-		if ((n = sendn(fd, h.buffer, h.len)) != 0) {
+		if ((n = readbuf->readn(h.buffer, h.len)) != 0) {
 			return n;
 		}
+
+		pushreq.push_back(h);
 	}
 
     return 0;

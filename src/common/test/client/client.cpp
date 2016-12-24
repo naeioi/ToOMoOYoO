@@ -33,18 +33,18 @@ int main()
 	PushReq pushreq;
 
 	controller->login(loginReq, loginres);
-	controller->signup(signupReq, signuperes);
-	/* receiver test */
-	controller->makeReceiver(INIT, receiver);
-	receiver->sendPull(pullreq);
-	receiver->waitDirInfo(dirinfo);
-	receiver->waitPush(pushreq);
+	//controller->signup(signupReq, signuperes);
+	/* receiver test */	
+	//controller->makeReceiver(INIT, receiver);
+	//receiver->sendPull(pullreq);
+	//receiver->waitDirInfo(dirinfo);
+	//receiver->waitPush(pushreq);
 		
 	/* sender test */
 	pushreq = { { { "v.mp4",{ "video", "files" } }, 0, 10, "hello, world" } };
 	controller->makeSender(INIT, sender);
-	sender->push(pushreq);
-	sender->sendDirInfo(dirinfo);
+	//sender->push(pushreq);
+	//sender->sendDirInfo(dirinfo);
 	sender->waitPull(pullreq);
 	return 0;
 }

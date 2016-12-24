@@ -28,10 +28,6 @@ public:
         data = data_;
     }   
     ~Buffer() {
-        try {
-            delete data;
-        }
-        catch(std::exception e) {}
     }
     char* raw() {
         return data;
@@ -79,8 +75,9 @@ struct DirInfoEntry {
 	TMY::Chunks chunks;
 	json toJSON() const;
 };
-
 typedef std::shared_ptr<DirInfoEntry> DirInfoEntry_ptr;
+
+time_t str2time(const std::string &);
 
 class DirInfo: private std::vector<DirInfoEntry> {
 private:
@@ -144,7 +141,7 @@ struct PushReqEntry {
 	FilePath filePath;
 	int offset;
 	int len;
-	const char* buffer;
+	char* buffer;
 };
 
 typedef std::shared_ptr<PushReqEntry> PushReqEntry_ptr;

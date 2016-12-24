@@ -3,8 +3,8 @@
 #include <assert.h>
 
 #ifdef _WIN32
-void setnb(int fd) {
-    unsigned long on = 1;
+void setnb(int fd, bool block) {
+    unsigned long on = block ? 0 : 1;
     ioctlsocket(fd, FIONBIO, &on);
 }
 
@@ -30,10 +30,14 @@ void tclose(int fd) {
     close(fd);
 }
 
-void setnb(int fd) {
+void setnb(int fd, bool block) {
     int oflag = fcntl(fd, F_GETFL, 0);
-	fcntl(fd, F_SETFL, oflag | O_NONBLOCK);
-}
+
+	if(!block)
+		fcntl(fd, F_SETFL, oflag | O_NONBLOCK);
+	else 
+		fcntl(fd, F_SETFL, oflag & (~O_NONBLOCK));
+}	
 
 
 #endif

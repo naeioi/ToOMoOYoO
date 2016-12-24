@@ -56,6 +56,7 @@ static int connectto(int &fd, const SA* addr, bool blocking = 0, timeval timeout
 	else
 		return TERROR;
 
+	setnb(fd, true);
 	return 0;
 }
 
@@ -82,7 +83,70 @@ int Controller::reconnect() {
 }
 
 int Controller::signup(const SignupReq& signupReq, SignupRes& signupRes) {
-	return login(signupReq, signupRes);
+	/* Send Sign */
+	string msg = "Signup\n";
+	json header = {
+		{ "username", signupReq.username },
+		{ "password", signupReq.password },
+		{ "session", signupReq.session }
+	};
+	msg += header.dump();
+	int n = 0, m = 0;
+
+	while (n < msg.size()) {
+		if (!(blockt(fd, TWRITE, &timeout) | TWRITE))
+			return TTIMEOUT;
+		if ((m = send(fd, msg.c_str() + n, msg.length() - n, 0)) < 0)
+			return -1;
+		n += m;
+	}
+
+	blockt(fd, TWRITE, &timeout);
+	if ((m = send(fd, "\0", 1, 0)) < 0)
+		return -1;
+
+	logger("Sent Signup");
+
+	/* Wait for response */
+	unique_ptr<Readbuf_> readbuf(new Readbuf_(fd));
+	msg = "";
+	char buf[READBUFN];
+	while ((m = readbuf->readto(buf, '\n')) > 0) {
+		buf[m] = 0;
+		msg += buf;
+		if (buf[m - 1] == '\n') break;
+	}
+
+	if (m < 0)
+		return m;
+
+	if (m == 0)
+		return TCLOSE;
+
+	if (msg != "SignupRes\n") {
+		logger("Receive %s but not Signup", msg.c_str());
+		return TERROR;
+	}
+
+	msg = "";
+
+	while ((m = readbuf->readto(buf, BRKCHR)) > 0) {
+		buf[m] = 0;
+		msg += buf;
+		if (buf[m - 1] == BRKCHR) break;
+	}
+
+	if (m == 0)
+		return TCLOSE;
+
+	msg[m - 1] = 0;
+	json Signres_ = json::parse(msg.c_str());
+	signupRes = { Signres_["code"], Signres_["message"], Signres_["session"] };
+
+	/* Controller自己也记录 session 用于 makeSender 和 makeReceiver */
+	session = signupRes.session;
+
+	return 0;
 }
 
 int Controller::login(const LoginReq& loginReq, LoginRes& loginRes) {
@@ -143,7 +207,7 @@ int Controller::login(const LoginReq& loginReq, LoginRes& loginRes) {
 	if (m == 0)
 		return TCLOSE;
 
-	*msg.rbegin() = 0;
+	msg[m - 1] = 0;
 	json loginres_ = json::parse(msg.c_str());
 	loginRes = { loginres_["code"], loginres_["message"], loginres_["session"] };
 
@@ -203,7 +267,7 @@ int Controller::waitLoginSignup(LoginReq& loginReq, int &type) {
 	if (m < 0)
 		return m;
 
-	*msg.rbegin() = 0;
+	msg[m - 1] = 0;
 	auto loginReq_ = json::parse(msg.c_str());
 	loginReq = {
 		loginReq_["username"],
@@ -252,7 +316,8 @@ int Controller::makeSender(TunnelMode mode, Sender_ptr& sender) {
 	string msg = "Tunnel\n";
 	json header = {
 		{"role", SENDER},
-		{"mode", mode}
+		{"mode", mode},
+		{"session", session}
 	};
 	msg += header.dump();
 	msg += "\0";
@@ -266,6 +331,8 @@ int Controller::makeSender(TunnelMode mode, Sender_ptr& sender) {
 			return -1;
 		n += m;
 	}
+
+	sender = Sender_ptr(new Sender());
 
 	sender->fd = nfd;
 	sender->session = session;
@@ -285,7 +352,8 @@ int Controller::makeReceiver(TunnelMode mode, Receiver_ptr& receiver) {
 	string msg = "Tunnel\n";
 	json header = {
 		{ "role", RECEIVER },
-		{ "mode", mode }
+		{ "mode", mode },
+		{ "session", session }
 	};
 	msg += header.dump();
 	msg += "\0";
@@ -299,6 +367,8 @@ int Controller::makeReceiver(TunnelMode mode, Receiver_ptr& receiver) {
 			return -1;
 		n += m;
 	}
+
+	receiver = Receiver_ptr(new Receiver());
 
 	receiver->fd = nfd;
 	receiver->session = session;

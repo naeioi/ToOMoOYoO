@@ -3,12 +3,6 @@ enum TsockErr {
 	TOK = 0, TTIMEOUT, TERROR, TCLOSE, TNOSESSION
 };
 
-#ifdef DEBUG
-#define BRKCHR '#'
-#else
-#define BRKCHR '\0'
-#endif
-
 #ifdef _WIN32
 
 #define _CRT_NONSTDC_NO_WARNINGS
@@ -18,7 +12,7 @@ enum TsockErr {
 #pragma comment(lib, "Ws2_32.lib")
 
 void initsock();
-void setnb(int fd);
+void setnb(int fd, bool block = false);
 void tclose(int fd);
 int terrno();
 
@@ -154,7 +148,7 @@ int terrno();
 
 #define terrno() errno
 
-void setnb(int fd);
+void setnb(int fd, bool block = false);
 
 void tclose(int fd);
 
@@ -189,13 +183,29 @@ inline int blockt(int fd, int io, const timeval *timeout = _default_to_p) {
 	return flags;
 }
 
-inline int sendn(int fd, const char *buf, int len, bool blocking = 0, const timeval *timeout = _default_to_p) {
+inline int sendn(int fd, const char *buf, int len, bool blocking = 1, const timeval *timeout = _default_to_p) {
 	int n = 0, m = 0;
 	while (n < len) {
-		if (!(blockt(fd, TWRITE, timeout) | TWRITE))
-			return TTIMEOUT;
+		if(!blocking)
+			if (!(blockt(fd, TWRITE, timeout) | TWRITE))
+				return TTIMEOUT;
 		if ((m = send(fd, buf + n, len - n, 0)) < 0)
 			return -1;
+		n += m;
+	}
+	return 0;
+}
+
+inline int readn(int fd, char *buf, int len, bool blocking = 1, const timeval *timeout = _default_to_p) {
+	int n = 0, m = 0;
+	while (n < len) {
+		if (!blocking)
+			if (!(blockt(fd, TREAD, timeout) | TREAD))
+				return TTIMEOUT;
+		if ((m = recv(fd, buf + n, len - n, 0)) < 0) {
+			auto err = terrno();
+			return -1;
+		}
 		n += m;
 	}
 	return 0;

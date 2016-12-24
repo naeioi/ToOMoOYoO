@@ -8,5 +8,3 @@
 
 extern int tmyerrono; /* Global error code */
 extern char *tmyerrstr; /* global error string */
-
-#define DEBUG

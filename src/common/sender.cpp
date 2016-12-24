@@ -80,9 +80,7 @@ int Sender::waitPull(PullReq& pullreq) {
 	if (m < 0)
 		return m;
 
-	*msg.rbegin() = 0;
-
-	if (msg != "Pull") {
+	if (msg != "Pull\n") {
 		logger("Received %s but expect Pull", msg.c_str());
 		return TERROR;
 	}
@@ -98,7 +96,7 @@ int Sender::waitPull(PullReq& pullreq) {
 		return TCLOSE;
 	if (m < 0)
 		return m;
-	*msg.rbegin() = 0;
+	msg[m - 1] = 0;
 
 	/* parse */
 
@@ -112,8 +110,8 @@ int Sender::waitPull(PullReq& pullreq) {
 		PullReqEntry h;
 		h.len = e["len"];
 		h.offset = e["offset"];
-		h.filePath.filename = e["filename"].dump();
-		h.filePath.pathArr = move(str2PathArr(e["path"].dump()));
+		h.filePath.filename = e["filename"].get<string>();
+		h.filePath.pathArr = move(str2PathArr(e["path"].get<string>()));
 		pullreq.push_back(h);
 	}
 
