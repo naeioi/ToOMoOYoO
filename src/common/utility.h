@@ -29,7 +29,7 @@ Readbuf<N>::Readbuf(int fd_) {
 }
 
 template <int N>
-int Readbuf<N>::readto(char *b, char det) {
+int Readbuf<N>::readto(char *b, char det, bool blocking = false) {
 
 	if (det != lastdet && t-buf > 0) {
 		int n = t - buf;
@@ -55,17 +55,21 @@ int Readbuf<N>::readto(char *b, char det) {
 
 	while (t-buf < N / 2) {
 
+		int flags;
+		if (!blocking) {
+
 #ifdef DEBUG
-		timeval tv = { 30, 0 };
-		int flags = blockt(fd, TREAD, &tv);
+			timeval tv = { 30, 0 };
+			flags = blockt(fd, TREAD, &tv);
 #else
-		int flags = blockt(fd, TREAD);
+			flags = blockt(fd, TREAD);
 #endif
 
-
-		if (!(flags | TREAD)) {
-			return -1;
+			if (!(flags | TREAD)) {
+				return -1;
+			}
 		}
+
 		int n = recv(fd, t, N - (t - buf), 0);
 		if (n <= 0) {
 			return n;

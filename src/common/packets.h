@@ -92,6 +92,7 @@ public:
 	using vector::begin;
 	using vector::end;
 	using vector::size;
+	using vector::clear;
 	json toJSON() const;
 };
 

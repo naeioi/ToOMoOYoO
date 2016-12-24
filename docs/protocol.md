@@ -83,7 +83,7 @@ DirInfo\n
         "path": "/video",
         "md5": "9e107d9d372bb6826bd81d3542a419d6",
         "len": 1024,
-        "modetime": "2011-10-08T07:07:09Z"
+        "modtime": "2011-10-08T07:07:09Z"
     },
     { ... }
 ]\0

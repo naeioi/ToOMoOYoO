@@ -17,7 +17,7 @@ public:
 
 	int waitDirInfo(DirInfo&);
 	int sendPull(const PullReq&);
-	int waitPush(PushReq_ptr&);
+	int waitPush(PushReq&);
 	~Receiver();
 };
 
